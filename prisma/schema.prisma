@@ -27,13 +27,14 @@ model User {
 }
 
 model Message {
-  id         Int      @id @default(autoincrement())
-  content    String
-  senderId   Int
-  receiverId Int
-  createdAt  DateTime @default(now())
-  sender     User     @relation("SentMessages", fields: [senderId], references: [id])
-  receiver   User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  id                Int      @id @default(autoincrement())
+  content           String // Original content
+  translatedContent String // Translated content
+  senderId          Int
+  receiverId        Int
+  createdAt         DateTime @default(now())
+  sender            User     @relation("SentMessages", fields: [senderId], references: [id])
+  receiver          User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
 }
 
 model FriendRequest {
