@@ -3,7 +3,7 @@ const express = require('express');
 const { createServer } = require('http');
 const { Server: SocketIOServer } = require('socket.io');
 const { Socket } = require('socket.io');
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require('./../../node_modules/@prisma/client');
 const axios = require('axios');
 
 const prisma = new PrismaClient();

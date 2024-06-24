@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start", 
     "start:socket": "node src/socket-server/server.ts",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate --schema=src/prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^5.15.1",
