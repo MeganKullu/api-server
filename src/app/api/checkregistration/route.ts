@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { users } from "@/src/db/db";
 
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   
   try {
     const requestBody = await req.json();
