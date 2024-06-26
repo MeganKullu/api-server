@@ -15,7 +15,7 @@ const io = new SocketIOServer(httpServer);
 
 const TranslateText = async (content, senderLanguage, receiverLanguage) => {
   try {
-    const response = await axios.post('http://localhost:8000/translate/text-to-text', {
+    const response = await axios.post('http://34.16.236.221/translate/text-to-text', {
       text: content,
       src_lang: senderLanguage,
       tgt_lang: receiverLanguage,

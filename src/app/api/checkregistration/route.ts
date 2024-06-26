@@ -1,7 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
 import { users } from "@/src/db/db";
 
+
 export async function GET(req: NextRequest) {
+  
   try {
     const requestBody = await req.json();
     const { firebaseId } = requestBody;
