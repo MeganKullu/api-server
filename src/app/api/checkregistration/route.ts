@@ -3,7 +3,7 @@ import { users } from "@/src/db/db";
 
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  
+
   try {
     const requestBody = await req.json();
     const { firebaseId } = requestBody;
