@@ -6,10 +6,18 @@ export async function POST(req: NextRequest) {
     const requestBody = await req.json();
     const { firebaseId, receiverUsername, status } = requestBody;
 
+    // Validate status
+    const validStatuses = ["PENDING", "ACCEPTED", "REJECTED"];
+    if (!validStatuses.includes(status)) {
+      return NextResponse.json(
+        { Message: "Invalid status provided" },
+        { status: 400 }
+      );
+    }
+
+    // Find the sender user by firebaseId
     const sender = await users.findUnique({
-      where: {
-        firebaseId,
-      },
+      where: { firebaseId },
     });
 
     if (!sender) {
@@ -19,10 +27,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Find the receiver user by username
     const receiver = await users.findUnique({
-      where: {
-        username: receiverUsername,
-      },
+      where: { username: receiverUsername },
     });
 
     if (!receiver) {
@@ -32,6 +39,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Find the friend request
     const friendRequest = await friendRequests.findFirst({
       where: {
         senderId: sender.id,
@@ -46,13 +54,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Update the friend request status
     await friendRequests.update({
-      where: {
-        id: friendRequest.id,
-      },
-      data: {
-        status,
-      },
+      where: { id: friendRequest.id },
+      data: { status },
     });
 
     return NextResponse.json(
@@ -60,6 +65,7 @@ export async function POST(req: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
       { Message: "Could not update friend request" },
       { status: 500 }

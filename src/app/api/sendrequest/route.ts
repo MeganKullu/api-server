@@ -6,10 +6,9 @@ export async function POST(req: NextRequest) {
     const requestBody = await req.json();
     const { firebaseId, receiverUsername } = requestBody;
 
+    // Find the sender user by firebaseId
     const sender = await users.findUnique({
-      where: {
-        firebaseId,
-      },
+      where: { firebaseId },
     });
 
     if (!sender) {
@@ -19,10 +18,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Find the receiver user by username
     const receiver = await users.findUnique({
-      where: {
-        username: receiverUsername,
-      },
+      where: { username: receiverUsername },
     });
 
     if (!receiver) {
@@ -32,6 +30,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Check if a friend request already exists between the users
+    const existingRequest = await friendRequests.findFirst({
+      where: {
+        senderId: sender.id,
+        receiverId: receiver.id,
+      },
+    });
+
+    if (existingRequest) {
+      return NextResponse.json(
+        { Message: "Friend request already sent" },
+        { status: 400 }
+      );
+    }
+
+    // Create a new friend request
     await friendRequests.create({
       data: {
         senderId: sender.id,
@@ -42,7 +56,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { Message: "Friend Request Sent" },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
     return NextResponse.json(
