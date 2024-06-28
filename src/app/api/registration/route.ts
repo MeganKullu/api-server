@@ -19,13 +19,19 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await users.create({
+    const newUser = await users.create({
       data: {
         language,
         firebaseId,
         username,
       },
     });
+
+    return NextResponse.json(
+      { Message: "User registered successfully", user: newUser},
+      { status: 201 }
+    );
+
   } catch (error) {
     return NextResponse.json(
       { Message: "Could not update at this time" },
