@@ -70,8 +70,8 @@ io.on('connection', (socket) => {
   });
 });
 
-httpServer.listen(3001, () => {
-  console.log('Socket server running on http://localhost:3001');
+httpServer.listen(3002, () => {
+  console.log('Socket server running on http://localhost:3002');
 });
 //we will try next server instead
 
