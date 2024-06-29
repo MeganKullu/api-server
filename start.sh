@@ -1,4 +1,4 @@
-
+#!/bin/bash
 npm start &
 
 sleep 1
