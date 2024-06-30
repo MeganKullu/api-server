@@ -16,7 +16,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (user) {
       return NextResponse.json(
-        { Message: "User has registered" },
+        { Message: "User has registered", username: user.username},
         { status: 200 }
       );
     } else {
