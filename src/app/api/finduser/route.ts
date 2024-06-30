@@ -16,9 +16,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (userslist.length > 0) {
       return NextResponse.json(
-        { Message: "User found" },
+        { Message: "User found", users: userslist },
         { status: 200 },
-        { users: userslist }
       );
     } else {
       return NextResponse.json({ Message: "User not found" }, { status: 404 });
