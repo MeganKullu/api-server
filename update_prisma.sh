@@ -2,5 +2,5 @@
 #!/bin/bash
 
 # Copy the Prisma schema
-cp /home/kullumegan/Chat-server/src/prisma/schema.prisma /home/kullumegan/Chat-server/socket-server/
+cp /home/kullumegan/Chat-server/src/prisma/schema.prisma /home/kullumegan/socket-server/
 
