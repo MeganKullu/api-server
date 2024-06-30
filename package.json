@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start", 
-    "start:socket": "node src/socket-server/server.ts",
+    "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate --schema=src/prisma/schema.prisma"
   },
