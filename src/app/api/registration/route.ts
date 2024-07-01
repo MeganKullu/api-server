@@ -4,7 +4,7 @@ import { users } from "@/src/db/db";
 export async function POST(req: NextRequest) {
   try {
     const requestBody = await req.json();
-    const { language, firebaseId, username } = requestBody;
+    const { language, firebaseId, username, status, avatar } = requestBody;
 
     const user = await users.findUnique({
       where: {
@@ -24,6 +24,8 @@ export async function POST(req: NextRequest) {
         language,
         firebaseId,
         username,
+        status,
+        avatar
       },
     });
 
