@@ -4,7 +4,7 @@ import { friendRequests, users } from "@/src/db/db";
 export async function POST(req: NextRequest) {
   try {
     const requestBody = await req.json();
-    const { firebaseId, receiverUsername, status } = requestBody;
+    const { senderId, receiverId, status } = requestBody;
 
     // Validate status
     const validStatuses = ["PENDING", "ACCEPTED", "REJECTED"];
@@ -14,36 +14,12 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
-    // Find the sender user by firebaseId
-    const sender = await users.findUnique({
-      where: { firebaseId },
-    });
-
-    if (!sender) {
-      return NextResponse.json(
-        { Message: "Sender User does not exist" },
-        { status: 404 }
-      );
-    }
-
-    // Find the receiver user by username
-    const receiver = await users.findUnique({
-      where: { username: receiverUsername },
-    });
-
-    if (!receiver) {
-      return NextResponse.json(
-        { Message: "Receiver User does not exist" },
-        { status: 404 }
-      );
-    }
-
+    
     // Find the friend request
     const friendRequest = await friendRequests.findFirst({
       where: {
-        senderId: sender.id,
-        receiverId: receiver.id,
+        senderId,
+        receiverId,
       },
     });
 
@@ -62,8 +38,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(
       { Message: "Friend Request Updated" },
-      { status: 200 }
+      { status: 201 }
     );
+
   } catch (error) {
     console.error(error);
     return NextResponse.json(
