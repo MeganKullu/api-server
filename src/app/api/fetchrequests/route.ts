@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { friendRequests, users } from "@/src/db/db";
 
-export default async function POST(req: NextRequest){
+export async function POST(req: NextRequest){
     try {
         const requestBody = await req.json();
         const { firebaseId} = requestBody;
