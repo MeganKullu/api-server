@@ -18,6 +18,8 @@ model User {
   firebaseId       String          @unique
   username         String          @unique
   language         String
+  avatar           String?
+  status           String          @db.VarChar(128)
   messagesSent     Message[]       @relation("SentMessages")
   receivedMessages Message[]       @relation("ReceivedMessages")
   friends          User[]          @relation("UserFriends")
@@ -33,6 +35,7 @@ model Message {
   senderId          Int
   receiverId        Int
   createdAt         DateTime @default(now())
+  isRead            Boolean  @default(false) 
   sender            User     @relation("SentMessages", fields: [senderId], references: [id])
   receiver          User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
 }

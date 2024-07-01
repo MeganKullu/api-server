@@ -4,6 +4,8 @@ CREATE TABLE "User" (
     "firebaseId" TEXT NOT NULL,
     "username" TEXT NOT NULL,
     "language" TEXT NOT NULL,
+    "avatar" TEXT,
+    "status" VARCHAR(128) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -12,9 +14,11 @@ CREATE TABLE "User" (
 CREATE TABLE "Message" (
     "id" SERIAL NOT NULL,
     "content" TEXT NOT NULL,
+    "translatedContent" TEXT NOT NULL,
     "senderId" INTEGER NOT NULL,
     "receiverId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "isRead" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Message_pkey" PRIMARY KEY ("id")
 );
