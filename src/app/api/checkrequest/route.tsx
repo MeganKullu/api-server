@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     } else {
       return NextResponse.json(
         { Message: "Friend request not sent" },
-        { status: 404 }
+        { status: 400 }
       );
     }
   } catch (error) {
