@@ -18,7 +18,7 @@ model User {
   firebaseId       String          @unique
   username         String          @unique
   language         String
-  avatar           String?
+  avatar           String?         @default("../../../assets/images/avatardefault.png")
   status           String          @db.VarChar(128)
   messagesSent     Message[]       @relation("SentMessages")
   receivedMessages Message[]       @relation("ReceivedMessages")
