@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         if (!user) {
             return NextResponse.json(
               { Message: "Sender User does not exist" },
-              { status: 404 }
+              { status: 400 }
             );
         }
 
@@ -48,6 +48,14 @@ export async function POST(req: NextRequest) {
                 { status: 200 }
             );
         }
+
+        if (friends.length === 0) {
+            return NextResponse.json(
+                { Message: "No friends found" },
+                { status: 404 }
+            );
+        }
+        
     } catch (error) {
         console.error("Failed to fetch friends:", error);
         return NextResponse.json(
