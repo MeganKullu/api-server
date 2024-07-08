@@ -32,12 +32,12 @@ model Message {
   id                Int      @id @default(autoincrement())
   content           String // Original content
   translatedContent String // Translated content
-  senderId          Int
-  receiverId        Int
+  senderId          String
+  receiverId        String
   createdAt         DateTime @default(now())
   isRead            Boolean  @default(false) 
-  sender            User     @relation("SentMessages", fields: [senderId], references: [id])
-  receiver          User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  sender            User     @relation("SentMessages", fields: [senderId], references: [firebaseId])
+  receiver          User     @relation("ReceivedMessages", fields: [receiverId], references: [firebaseId])
 }
 
 model FriendRequest {
