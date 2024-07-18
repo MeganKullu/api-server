@@ -15,6 +15,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
     });
 
+    console.log(userWithFriends);
+
     //Initialize an array to hold the results
 
     let friendsWithLastMessage = [];
@@ -35,12 +37,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 senderId: friend.firebaseId,
                 receiverId: userWithFriends.firebaseId,
               },
-            ],    
+            ],
           },
           orderBy: {
             createdAt: "desc",
           },
         });
+        console.log(lastMessage);
 
         // Add the friend and the last message to the results array
         friendsWithLastMessage.push({
@@ -60,7 +63,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
       { Message: "Messages fetched successfully", friendsWithLastMessage },
       { status: 200 }
     );
-
   } catch (error) {
     return NextResponse.json(
       { Message: "Could not fetch messages at this time" },
