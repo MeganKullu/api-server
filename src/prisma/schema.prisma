@@ -42,10 +42,10 @@ model Message {
 
 model FriendRequest {
   id         Int      @id @default(autoincrement())
-  senderId   Int
-  receiverId Int
+  senderId   String
+  receiverId String
   createdAt  DateTime @default(now())
   status     String   @default("PENDING") // Can be "PENDING, ACCEPTED, REJECTED"
-  sender     User     @relation("SentRequests", fields: [senderId], references: [id])
-  receiver   User     @relation("ReceivedRequests", fields: [receiverId], references: [id])
+  sender     User     @relation("SentRequests", fields: [senderId], references: [firebaseId])
+  receiver   User     @relation("ReceivedRequests", fields: [receiverId], references: [firebaseId])
 }

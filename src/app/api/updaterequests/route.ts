@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     // Find the friend request
     const friendRequest = await friendRequests.findFirst({
       where: {
@@ -36,11 +36,32 @@ export async function POST(req: NextRequest) {
       data: { status },
     });
 
+    //update friend list
+
+    if (status === "ACCEPTED") {
+      await users.update({
+        where: { id: senderId },
+        data: {
+          friends: {
+            connect: { id: receiverId },
+          },
+        },
+      });
+
+      await users.update({
+        where: { id: receiverId },
+        data: {
+          friends: {
+            connect: { id: senderId },
+          },
+        },
+      });
+    }
+
     return NextResponse.json(
       { Message: "Friend Request Updated" },
       { status: 201 }
     );
-
   } catch (error) {
     console.error(error);
     return NextResponse.json(
