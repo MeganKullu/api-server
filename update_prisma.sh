@@ -1,4 +1,4 @@
-# /home/kullumegan/Chat-server/update_prisma.sh
+# /home/kullumegan/api-server/update_prisma.sh
 #!/bin/bash
 
 # Copy the Prisma schema

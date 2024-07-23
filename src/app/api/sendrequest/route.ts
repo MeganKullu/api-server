@@ -33,8 +33,8 @@ export async function POST(req: NextRequest) {
     // Check if a friend request already exists between the users
     const existingRequest = await friendRequests.findFirst({
       where: {
-        senderId: sender.id,
-        receiverId: receiver.id,
+        senderId: sender.firebaseId,
+        receiverId: receiver.firebaseId,
       },
     });
 
@@ -48,8 +48,8 @@ export async function POST(req: NextRequest) {
     // Create a new friend request
     await friendRequests.create({
       data: {
-        senderId: sender.id,
-        receiverId: receiver.id,
+        senderId: sender.firebaseId,
+        receiverId: receiver.firebaseId,
         status: "PENDING",
       },
     });

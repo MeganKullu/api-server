@@ -30,8 +30,8 @@ export async function POST(req: NextRequest) {
 
     const existingRequest = await friendRequests.findFirst({
       where: {
-        senderId: sender.id,
-        receiverId: receiver.id,
+        senderId: sender.firebaseId,
+        receiverId: receiver.firebaseId,
       },
     });
 
