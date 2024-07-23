@@ -55,12 +55,12 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(
-      { Message: "Friend Request Sent" },
+      { Message: "Friend Request Sent"},
       { status: 201 }
     );
   } catch (error) {
     return NextResponse.json(
-      { Message: "Could not send friend request" },
+      { Message: "Could not send friend request"},
       { status: 500 }
     );
   }
