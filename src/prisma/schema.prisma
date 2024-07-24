@@ -18,7 +18,7 @@ model User {
   firebaseId       String          @unique
   username         String          @unique
   language         String
-  avatar           String?         @default("../../../assets/images/avatardefault.png")
+  avatar           Bytes?          
   status           String          @db.VarChar(128)
   messagesSent     Message[]       @relation("SentMessages")
   receivedMessages Message[]       @relation("ReceivedMessages")
@@ -35,7 +35,7 @@ model Message {
   senderId          String
   receiverId        String
   createdAt         DateTime @default(now())
-  isRead            Boolean  @default(false) 
+  isRead            Boolean  @default(false)
   sender            User     @relation("SentMessages", fields: [senderId], references: [firebaseId])
   receiver          User     @relation("ReceivedMessages", fields: [receiverId], references: [firebaseId])
 }
