@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
     const pendingRequests = await friendRequests.findMany({
       where: {
-        receiverId: user.id,
+        receiverId: user.firebaseId,
         status: "PENDING",
       },
       include: {
